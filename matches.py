@@ -1,3 +1,8 @@
+#
+# We don't create class or define function as it is for children to learn a computer language
+#
+
+
 # this is not used, as it was marked '*' for the valid statement for debug purpose
 # marks = {True: '*', False: ''}
 
@@ -50,11 +55,11 @@ for op in ops:
                     else:
                         result = d3 * 10 + d4
 
-                    # check the statement is equal or not with + or - operation
+                    # check the statement is valid or not with + or - operation
                     if op == '+':
-                        equal = (d1 + d2 == result)
+                        valid = (d1 + d2 == result)
                     else:
-                        equal = (d1 - d2 == result)
+                        valid = (d1 - d2 == result)
                 
                     statement = str(d1) + op + str(d2) + \
                             '=' + str(d3) + str(d4)
@@ -66,12 +71,12 @@ for op in ops:
                     totallines = len(lines)
 
                     # sort by the valid statement first
-                    if equal:
+                    if valid:
                         results[totallines].insert(0, 
-                            [statement, lines, equal, [], []])
+                            [statement, lines, valid, [], []])
                     else:
                         results[totallines].append(
-                            [statement, lines, equal, [], []])
+                            [statement, lines, valid, [], []])
 
 
 # besides the minus and equal sign, total of other matches are less than 2
