@@ -1,6 +1,8 @@
+# /usr/bin/python
+# coding=UTF-8
 #
 # We don't create class or define function as it is for children to solve a problem with computer.
-# 因為這是教小朋友用電腦解決問題，所以沒有使用 class, define 以及 # /usr/bin/python 等語法。
+# 因為這是教小朋友用電腦解決問題，所以沒有使用 class, define 等語法。
 #
 
 
