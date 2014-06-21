@@ -71,6 +71,12 @@ for op in ops:
                     totallines = len(lines)
 
                     # sort by the valid statement first
+                    
+                    # statement: this field is for print
+                    # lines: this field is for compute differences
+                    # valid: for determine necessary statements to check
+                    # []: for store the index of a statement which has 1 difference with the current one
+                    # []: for store the index of a statement which has 2 differences with the current one
                     if valid:
                         results[totallines].insert(0, 
                             [statement, lines, valid, [], []])
@@ -79,32 +85,34 @@ for op in ops:
                             [statement, lines, valid, [], []])
 
 
-# besides the minus and equal sign, total of other matches are less than 2
+# besides the minus and equal sign, total of other matches are less than 30
 for totallines in xrange(30):
     statsize = len(results[totallines])
     
-    # skill if too less statements under it, or no valid statements
+    # skip if not many statements under it, or all is invalid statements
     if statsize < 2 or results[totallines][0][2] is False:
         continue
 
     # found the count of valid statements        
-    validsize = 1
-    while results[totallines][validsize][2] is True:
+    validsize = 0
+    while results[totallines][validsize+1][2] is True:
         validsize = validsize + 1
         
     # use set difference to find the difference matches under the same total matches (totallines)
-    for validindex in xrange(validsize -1):
+    for validindex in xrange(validsize):
+        
         for statindex in xrange(validindex + 1, statsize):
 
             # we use difference instead of symmetric_difference because the totallines is the same            
             diff = results[totallines][validindex][1] - \
                     results[totallines][statindex][1]
+
+            # skip if not 1 or 2 differences
             diffindex = len(diff) + 2
-            
-            # 1 or 2 differences will be kept
             if diffindex > 4 or diffindex == 2:
                 continue
 
+            # create the relations for both
             results[totallines][validindex][diffindex].append(statindex)
             results[totallines][statindex][diffindex].append(validindex)
 
@@ -113,9 +121,11 @@ for totallines in xrange(30):
         # plist = []
         for statindex in xrange(statsize):
             statinfo = results[totallines][statindex]
+            
             # skip if no other statement difference from this statement in 1 or 2 moves
             if len(statinfo[difference]) == 0:
                 continue
+            
             # plist shows all statements in specified totalines
             # plist.append(statinfo[0] + marks[statinfo[2]])
 
@@ -125,12 +135,14 @@ for totallines in xrange(30):
 
 while True:
     try:
-        # -1 is because array's index starts from 0
+        # -1 is because an array's index starts from 0
         movables = int(raw_input('How many matches can move [1-2] ? ')) - 1 
         statement = raw_input('What is the statement? ')
 
+        # print the result if has the answer
         if statement in quiz[movables]:
             print(quiz[movables][statement])
+            
     except KeyboardInterrupt:
         break
     except Exception:
