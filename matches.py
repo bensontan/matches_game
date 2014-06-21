@@ -1,5 +1,7 @@
-marks = {True: '*', False: ''}
+# this is not used, as it was marked '*' for the valid statement for debug purpose
+# marks = {True: '*', False: ''}
 
+# we skip the matches of '-' and '=' signs as they always on in wahtever statements 
 ops = {'+': [1], '-': []}
 
 # assign a line a different number (2-8), and then a digit associate with a set of them.
@@ -103,12 +105,13 @@ for totallines in xrange(30):
 
     # assoicate movables and statement to its answer 
     for difference in xrange(3,5):
-        plist = []
+        # plist = []
         for statindex in xrange(statsize):
             statinfo = results[totallines][statindex]
             # skip if no other statement difference from this statement in 1 or 2 moves
             if len(statinfo[difference]) == 0:
                 continue
+            # plist shows all statements in specified totalines
             # plist.append(statinfo[0] + marks[statinfo[2]])
 
             # multiple answers will be joined and separated by ', '
@@ -125,3 +128,5 @@ while True:
             print(quiz[movables][statement])
     except KeyboardInterrupt:
         break
+    except Exception:
+        pass
