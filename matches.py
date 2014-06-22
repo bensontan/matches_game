@@ -160,7 +160,8 @@ for totallines in xrange(30):
             # Skip if no other statement difference from this statement in 1 or 2 moves.
             # 如果這個數學式移動幾個火柴棒沒有能成為另一個數學式（合法的）的話，跳過。
             # 例如：9+0=91 有移動２個的答案，卻沒有移動１個的答案。
-            if len(statinfo[difference]) == 0:
+            if len(statinfo[difference]) == 0 or \
+                    results[totallines][statinfo[difference][0]][2] is False:
                 continue
             
             # plist shows all statements in specified totalines
